@@ -30,11 +30,40 @@ public interface EmpMapper {
 	 * @Since : 2022. 11. 29.
 	 * @Author : mr.Choi
 	 * @Return : List<DeptVO>
-	 * @Comment : 
+	 * @Comment : 사원 추가
 	 */
 	List<DeptVO> selectDept();
 
 	int insertEMP(EmpVo vo);
+	
+	
+	
+	/**
+	 * @Since : 2022. 12. 1.
+	 * @Author : mr.Choi
+	 * @Return : int
+	 * @Comment : 사원 삭제
+	 */
+	int deleteEmp(int empno);
+	
+
+	int insertDEPT(DeptVO dept);
+	
+	/**
+	 * @Since : 2022. 12. 1.
+	 * @Author : mr.Choi
+	 * @Return : int
+	 * @Comment : 부서 폐지
+	 */
+	int deleteDept(int deptno);
+	
+	/**
+	 * @Since : 2022. 12. 1.
+	 * @Author : mr.Choi
+	 * @Return : int
+	 * @Comment : 사원 정보 수정
+	 */
+	int updateEmp(EmpVo vo);
 	
 	
 	

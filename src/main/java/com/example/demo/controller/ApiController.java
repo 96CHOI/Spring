@@ -8,6 +8,7 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.DeleteMapping;
 
 /*
  * RestControoler 와 Controller 차이점
@@ -17,6 +18,7 @@ import org.springframework.beans.factory.annotation.Autowired;
  */
 
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -166,9 +168,44 @@ public class ApiController {
 		return empMapper.selectDept();
 	}
 
+	@PostMapping("/api/v1/dept/newdept")
+	public int calldeptjoin(@RequestBody DeptVO dept) {
+		
+		return empMapper.insertDEPT(dept);
+	}
+	
+	@DeleteMapping("/api/v1/dept/{deptno}")
+	public int calldeptDelete(@PathVariable int deptno) {
+		return empMapper.deleteDept(deptno);
+	}
+	
 	@PostMapping("/api/v1/emp/join")
 	public int callEmpjoin(@RequestBody EmpVo emp) {
 		
 		return empMapper.insertEMP(emp);
 	}
+	
+	@DeleteMapping("/api/v1/emp/{empno}")
+	public int callEmpDelete(@PathVariable int empno) {
+		return empMapper.deleteEmp(empno);
+	}
+	
+	@PatchMapping("/api/v1/emp")
+	public int callEmpUpdate(@RequestBody EmpVo emp) {
+		return empMapper.updateEmp(emp);
+	}
+	
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
