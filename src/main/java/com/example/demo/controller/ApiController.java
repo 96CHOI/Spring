@@ -32,6 +32,7 @@ import com.example.demo.vo.EmpVo;
 import com.example.demo.vo.Login;
 import com.example.demo.vo.Login2;
 import com.example.demo.vo.Movie;
+import com.example.demo.vo.UsersVO;
 
 /*
  * RestController와 Controller 차이점
@@ -143,6 +144,9 @@ public class ApiController {
 	/*
 	 * C(Create) R(Read) U(Update) D(Delete) Get : 데이터 조회 == select Post : 데이터 생성
 	 * (전송) == insert Patch : 데이터 업데이트 == update Delete : 데이터 삭제 == delete
+	 * - 수정, 삭제, 조회, 생성
+	 * C(Create)R(Read)U(Update)D(Delete)
+	 * 
 	 */
 	@PostMapping("/api/v1/join2")
 	public boolean callJoin(@RequestBody Login2 login2, HttpServletRequest request) {
@@ -194,7 +198,27 @@ public class ApiController {
 	public int callEmpUpdate(@RequestBody EmpVo emp) {
 		return empMapper.updateEmp(emp);
 	}
-	
+	//회원 가입
+	@PostMapping("/api/v1/login3/join")
+	public int callUsersjoin(@RequestBody UsersVO users) {
+		
+		return empMapper.insertUsers(users);
+	}
+	//로그인
+	@PostMapping("/api/v1/login")
+	public int callUserLogin(@RequestBody UsersVO vo) {
+		return empMapper.selectUsersFindById(vo);
+	}
+	//관리자 페이지 (사용자 조회)
+	@GetMapping("/api/v1/users")
+	public List<UsersVO> callUsers() {
+		return empMapper.selectUsers();
+	}
+	// 사용자 정보 삭제
+	@DeleteMapping("/api/v1/users/{id}")
+	public int callusersDelete(@PathVariable String id) {
+		return empMapper.deleteUsers(id);
+	}
 }
 
 

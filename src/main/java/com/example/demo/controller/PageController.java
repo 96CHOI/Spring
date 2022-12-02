@@ -49,6 +49,11 @@ public class PageController {
 	public String callLogin2Page() {
 		return "login2";
 	}
+	
+	@GetMapping("/login3")
+	public String callLoginPage3() {
+		return "login3";
+	}
 
 	@GetMapping("/emp")
 	public String callempPage(HttpServletRequest request) {
@@ -67,4 +72,11 @@ public class PageController {
 
 		return "dept";
 	}
+	
+	@GetMapping("/users")
+	public String callUsersPage(HttpServletRequest request) {
+		return "users";
+	}
+	
+	
 }
