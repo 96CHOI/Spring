@@ -90,7 +90,10 @@
 		SELECT
 		count(*)
 		FROM users
-		WHERE id = #{id} AND pw = #{pw}
+		WHERE id = #{id}
+		<if test="pw != null">
+			AND pw = #{pw}
+		</if>
 	</select>
 	
 	<select id="selectUsers" resultType="com.example.demo.vo.UsersVO">
@@ -101,6 +104,7 @@
 		DELETE FROM users
 		WHERE id = #{id}
 	</delete>
+	
 
 
 

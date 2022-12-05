@@ -47,6 +47,8 @@ import com.example.demo.vo.UsersVO;
 // Rest : 자원 (== 데이터)
 @RestController
 public class ApiController {
+	
+	final String ROOT_URL  = "/api/v1";
 
 	// ApiService apiService = new ApiService(); // 클래스를 전역변수로
 	// @Autowired : Spring에서 객체를 관리함 (IoC : Inversion of Control 제어 역전)
@@ -218,6 +220,12 @@ public class ApiController {
 	@DeleteMapping("/api/v1/users/{id}")
 	public int callusersDelete(@PathVariable String id) {
 		return empMapper.deleteUsers(id);
+	}
+	
+	@GetMapping("/api/v1/users/{id}")
+	public boolean callUser(@PathVariable String id) {
+		
+		return apiService.checkUser(id);
 	}
 }
 
