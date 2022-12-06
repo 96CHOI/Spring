@@ -31,7 +31,7 @@ td, th {
 }
 
 tr:nth-child(even) {
-	background-color: lightpink;
+	background-color: rgb(255, 255, 128);
 }
 h3{
 	width: 200px;
@@ -42,8 +42,14 @@ h3{
 	justify-content: center;
 	align-items: center;
 }
-#dd0{
+#dd3{
 	width: 100%;
+	display: flex;
+	flex-direction: row;
+    align-items: flex-start;
+    flex-wrap: nowrap;
+}
+#dd0{
 	display: flex;
 	flex-direction: row;
     align-items: flex-start;
@@ -63,7 +69,7 @@ h3{
     margin: 0 auto;
     display: flex;
     justify-content: space-between;
-    background: hotpink;
+    background: yellow;
 }
 #dd input, button{
 	width: 200px;
@@ -77,32 +83,58 @@ h3{
     margin: 0 auto;
     display: flex;
     justify-content: space-around;
-    background: hotpink;
+    background: yellow;
+    border: 1px solid black;
 }
 #dd2 input{
 	width: 200px;
 	margin: 0 auto;
 }
+
+@media (max-width: 1400px){
+	h2{
+		width: 700px;
+	}
+	#dd0{
+		display: flex;
+    	flex-direction: column;
+    	margin: 0 auto;
+	}
+	#dd1{
+		width: 900px;
+		height: 200px;
+	}
+	#ta{
+		width: 900px;
+	}
+	table{
+		display: table-cell;
+	}
+}
+
 </style>
 </head>
 <body>
 	<h2>디엔비코드 관리자 페이지</h2>
-	<div id="dd0">
-		<div id="dd1">
-				<div id="dd2">
-			<h3>*사용자 정보 삭제*</h3>					
-					<input id="d_id" type="text" placeholder="사용자 아이디를 입력해주세요....">
-					<button type="button" onclick="doDelete()">사용자 정보 삭제</button>
-				</div>
-		</div>
-		<div id="ta">
-			<table id="users">
-				<tr>
-					<th id="usersName">사용자 이름</th>
-					<th id="usersId">사용자 아이디</th>
-					<th id="usersPw">사용자 비밀번호</th>
-				</tr>
-			</table>
+	<h3 th:text="${name} + '님 환영합니다.'"></h3>
+	<div id="dd3">
+		<div id="dd0">
+			<div id="dd1">
+					<div id="dd2">
+				<h3>*사용자 정보 삭제*</h3>					
+						<input id="d_id" type="text" placeholder="사용자 아이디를 입력해주세요....">
+						<button type="button" onclick="doDelete()">사용자 정보 삭제</button>
+					</div>
+			</div>
+			<div id="ta">
+				<table id="users">
+					<tr>
+						<th id="usersName">사용자 이름</th>
+						<th id="usersId">사용자 아이디</th>
+						<th id="usersPw">사용자 비밀번호</th>
+					</tr>
+				</table>
+			</div>
 		</div>
 	</div>
 </body>

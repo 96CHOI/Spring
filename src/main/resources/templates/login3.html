@@ -22,7 +22,7 @@ div {
     display: flex;
     justify-content: space-around;
     flex-direction: column;
-    background: hotpink;
+    background: rgb(255, 255, 128);
     border: 1px solid black;
 }
 h2{
@@ -47,10 +47,14 @@ button{
 	width: 200px;
 	height: 30px;
 	margin: 0 auto;
-	border: 1px solid lightpink;
-	background: lightpink;
+	border: 1px solid black;
+	background: yellow;
 	font-weight: bold;
     font-size: 15px;
+}
+button:hover{
+	background : lightpink;
+	cursor: pointer;
 }
 
 </style>
@@ -161,9 +165,9 @@ button{
         	data : JSON.stringify(jsonData),
         	dataType : 'json',
 			success : function(response) {
-				console.log(response);
-				if(response == 1){
+				if(response.user){
 					//페이지 이동 로직구현 예정
+					alert(response.name + "님 환영합니다. 🎉🎉");
 					location.href = '/users';
 				}else{
 					alert("아이디 혹은 비밀번호가 틀렸습니다.");

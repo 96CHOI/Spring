@@ -6,8 +6,10 @@ import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.DeleteMapping;
 
 /*
@@ -57,6 +59,9 @@ public class ApiController {
 
 	@Autowired
 	EmpMapper empMapper;
+	
+	@Autowired
+	PasswordEncoder passwordEncoder;
 
 	/*
 	 * 클래스 이름 : 앞에 대문자로 시작 ex) Apple (o) apple (x) 변수 명 : 상수를 제외한 변수 이름은 소문자 :
@@ -203,13 +208,43 @@ public class ApiController {
 	//회원 가입
 	@PostMapping("/api/v1/login3/join")
 	public int callUsersjoin(@RequestBody UsersVO users) {
+		String password = users.getPw();
+		password = passwordEncoder.encode(password);
 		
+		users.setPw(password);
+				
 		return empMapper.insertUsers(users);
 	}
 	//로그인
+	//세션 : 서버(자바 서블릿 컨테이너)에 임시적으로 데이터를 저장함
 	@PostMapping("/api/v1/login")
-	public int callUserLogin(@RequestBody UsersVO vo) {
-		return empMapper.selectUsersFindById(vo);
+	public UsersVO callUserLogin(@RequestBody UsersVO vo, HttpServletRequest req) {
+		
+		String password = vo.getPw();//HTML에 저장된 내 비밀번호 가져옴
+		
+		vo = empMapper.selectUsersPassword(vo);
+		//아이디 틀리면 vo에 null 들어감.
+		if(vo == null) {
+			vo = new UsersVO();
+			vo.setUser(false);
+		}
+		
+		String DBpassword = vo.getPw();//데이터베이스에 저장된 내 비밀번호 가져옴
+		
+		boolean isUser = passwordEncoder.matches(password, DBpassword);
+		
+		if(!isUser) {
+			vo.setUser(false);
+			return vo;
+		}
+		// 고객정보 세션에 넣기
+		HttpSession session = req.getSession(); //세션불러오기
+		// 세션은 key와 value로 구성 (HashMap과 동일)
+		// 세션은 서버가 종료될 때 까지 데이터가 유지됨(디폴트로 가지고 있는 시간은 30분)
+		session.setAttribute("name", vo.getName()); //세션 사용자 이름 저장
+		
+		vo.setUser(true);
+		return vo;
 	}
 	//관리자 페이지 (사용자 조회)
 	@GetMapping("/api/v1/users")

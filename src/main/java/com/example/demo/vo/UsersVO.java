@@ -8,8 +8,15 @@ public class UsersVO {
 	private String id;
 	private String pw;
 	private String name;
+	private boolean isUser;
 	
 	
+	public boolean isUser() {
+		return isUser;
+	}
+	public void setUser(boolean isUser) {
+		this.isUser = isUser;
+	}
 	public String getId() {
 		return id;
 	}
